@@ -1,0 +1,1 @@
+System.out.println(fleet.get(2).loadCargo(1));
