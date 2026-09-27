@@ -17,7 +17,7 @@ abstract class Shape implements Comparable<Shape> {
     @Override
     public String toString() {
         return "Area: " + area() + "\n" +
-                "Petimeter: " + perimeter();
+                "Perimeter: " + perimeter();
     }
 
     @Override
@@ -34,9 +34,9 @@ abstract class Shape implements Comparable<Shape> {
 
 class Circle extends Shape {
 
-    protected int radius;
+    protected double radius;
 
-    public Circle(String color, int radius) {
+    public Circle(String color, double radius) {
         super(color);
         this.radius = radius;
     }
@@ -122,12 +122,17 @@ interface Taxable {
 
 public class Shapes {
     public static void main(String[] args) {
+
         List<Shape> shapes = new ArrayList<Shape>();
 
         shapes.add(new Circle("Blue", 10));
-        shapes.add(new Rectangle("Red", 8, 5));
-        shapes.add(new Triangle("Green", 3, 4, 6));
+        shapes.add(new Circle("Bluegreen", 16));
+        shapes.add(new Rectangle("Red", 4, 5.5));
+        shapes.add(new Rectangle("Redorange", 8, 0.5));
+        shapes.add(new Triangle("Green", 3, 4, 5));
+        shapes.add(new Triangle("Greenpurple", 6, 8, 10));
         shapes.add(new TaxableRectangle("Orange", 10, 12, 1.22));
+        shapes.add(new TaxableRectangle("Orangeblue", 2, 12, 1.22));
 
         System.out.println("Before sorting: ");
         for (Shape shape : shapes) {
@@ -137,13 +142,13 @@ public class Shapes {
 
         Collections.sort(shapes);
 
-        System.out.println("After sorting: ");
+        System.out.println("After sorting (by area): ");
         for (Shape shape : shapes) {
             System.out.println(shape.toString());
         }
         System.out.println("--------------------------");
 
-        Collections.sort(shapes);
+        Collections.sort(shapes, (Shape s1, Shape s2) -> Double.compare(s1.perimeter(), s2.perimeter()));
 
         System.out.println("Sorting by perimeter: ");
         for (Shape shape : shapes) {
@@ -151,10 +156,10 @@ public class Shapes {
         }
         System.out.println("--------------------------");
 
-        System.out.println("Taxable Rectangle Test: ");
+        System.out.println("Taxable Object Test: ");
         for (Shape shape : shapes) {
-            if (shape instanceof TaxableRectangle taxableRect) {
-                System.out.println(taxableRect.getTax());
+            if (shape instanceof Taxable taxable) {
+                System.out.println(taxable.getTax());
             }
         }
     }
