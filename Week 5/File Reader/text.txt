@@ -1,0 +1,3 @@
+Hello this is a test of the safe file reader.
+The date is October 2nd, 2026.
+The time is 8:55PM.
