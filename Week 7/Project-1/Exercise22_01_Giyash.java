@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class Main {
+public class Exercise22_01_Giyash {
     public static String longestIncreasingSubstring(String str) {
 
         if (str.isEmpty()) {
