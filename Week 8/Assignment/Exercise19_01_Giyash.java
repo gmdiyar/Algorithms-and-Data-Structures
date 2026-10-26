@@ -1,4 +1,4 @@
-public class GenericStackAssignment {
+public class Exercise19_01_Giyash {
 
     static class GenericStack<E> {
 
