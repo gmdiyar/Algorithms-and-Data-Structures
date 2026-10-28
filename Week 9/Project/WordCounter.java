@@ -3,6 +3,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.TreeMap;
 
@@ -39,19 +40,31 @@ class WordFrequencyCounter {
         }
     }
 
-    public void sortMap() {
+    public void print10MostCommon() {
 
-        List<Integer> mostCommonWords = new ArrayList<>();
-        for (Integer word : words.values()) {
-            mostCommonWords.add(word);
+        List<Map.Entry<String, Integer>> mostCommonWords = new ArrayList<>(words.entrySet());
+
+        mostCommonWords.sort((o1, o2) -> Integer.compare(o2.getValue(), o1.getValue()));
+        
+        for (int i = 0; i < 10 && i < mostCommonWords.size(); i++) {
+            System.out.println(mostCommonWords.get(i).getKey());
         }
+    }
 
-        mostCommonWords.sort((o1, o2) -> Integer.compare(o2, o1));
-        mostCommonWords = mostCommonWords.subList(0, 10);
-        for (int i = 0; i < words.size();)
-            System.out.println(words.get);
-        // TreeMap<String, Integer> treeMap = new TreeMap<>(words);
-        // System.out.println(treeMap);
+    public void printHapaxLegomena() {
+
+        List<Map.Entry<String, Integer>> hapaxSet = new ArrayList<>(words.entrySet());
+
+        for (int i = 0; i < hapaxSet.size(); i++) {
+            if (hapaxSet.get(i).getValue() == 1) {
+                System.out.println(hapaxSet.get(i).getKey());
+            }
+        }
+    }
+
+    public void printWordsAsHashTree() {
+        TreeMap<String, Integer> treeMap = new TreeMap<>(words);
+        System.out.println(treeMap);
     }
 
     public void getHashMap() {
@@ -67,7 +80,8 @@ public class WordCounter {
 
         WordFrequencyCounter counter = new WordFrequencyCounter(input);
         counter.populteMap();
-        counter.getHashMap();
-        counter.sortMap();
+        // counter.print10MostCommon();
+        // counter.printWordsAsHashTree();
+        counter.printHapaxLegomena();
     }
 }
