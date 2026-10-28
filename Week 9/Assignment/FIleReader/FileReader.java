@@ -17,7 +17,7 @@ class Reader {
             System.out.println("Error: " + e);
         }
     }
-    
+
     public void sortWordlist() {
         wordList.sort(null);
     }
@@ -46,8 +46,11 @@ class Reader {
 
 public class FileReader {
     public static void main(String[] args) {
-        
-        System.out.println("Enter file path with extention (ex: file.txt): ");
+
+        // Entering text.txt at the prompts prints the contents
+        // of the text.txt file in this
+        // directory in ascending alphabetical order.
+        System.out.println("Enter file path with extention (ex: text.txt): ");
         Scanner input = new Scanner(System.in);
 
         Reader reader = new Reader(input.nextLine());
