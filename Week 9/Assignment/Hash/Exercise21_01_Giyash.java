@@ -1,13 +1,17 @@
 import java.util.LinkedHashSet;
 
-public class LinkedHashOperations {
+public class Exercise21_01_Giyash {
     @SuppressWarnings("unchecked")
     public static void main(String[] args) {
 
-        // LinkedHashSets were used in this excercise because they maintain their
-        // insertion order and guarantee that each element is unique. This could
+        // LinkedHashSets were used in this exercise because they maintain their
+        // insertion order and guarantee that each element is unique. A plain HashSet
+        // would print the union, difference, and intersection in an unpredictable
+        // order based on hash codes, while a LinkedHashSet prints them in the order
+        // the names were added, so the results are easy to check against the original
+        // lists and come out the same every run. This could
         // be applicable to a case where you have a user that purchased two items and is
-        // a cadidate for an advertisment of a similar item. For example, if Ethan
+        // a candidate for an advertisement of a similar item. For example, if Ethan
         // (exists in both sets) purchases an item from list A and is added to that list
         // of buyers, and purchases an item from list B and is added to that list of
         // buyers, the intersection of the two lists of buyers can be used as an input
@@ -38,28 +42,25 @@ public class LinkedHashOperations {
         names2.add("Benjamin");
         names2.add("Ava");
 
-        // I create a copy for each operation so as not to alter the orginal set, which
+        // I create a copy for each operation so as not to alter the original set, which
         // will be used as a mould for the rest of the copies.
-        LinkedHashSet<String> names1UnionCopy = new LinkedHashSet<>(names1);
-        LinkedHashSet<String> names2UnionCopy = new LinkedHashSet<>(names2);
+        LinkedHashSet<String> names1UnionCopy = (LinkedHashSet<String>) names1.clone();
 
         // Union of both sets. There were 4 overlapping names between the two lists
         // (Olivia, Ethan, Ava, and Lucas) so the addAll() operation combines all the
         // unique names (16).
-        names1UnionCopy.addAll(names2UnionCopy);
-        System.out.println(names1UnionCopy);
+        names1UnionCopy.addAll(names2);
+        System.out.println("Union: " + names1UnionCopy);
 
-        LinkedHashSet<String> names1DiffCopy = new LinkedHashSet<>(names1);
-        LinkedHashSet<String> names2DiffCopy = new LinkedHashSet<>(names2);
+        LinkedHashSet<String> names1DiffCopy = (LinkedHashSet<String>) names1.clone();
         // Difference of both sets (names1 - names2). Prints all the names that are only
         // in names1.
-        names1DiffCopy.removeAll(names2DiffCopy);
-        System.out.println(names1DiffCopy);
+        names1DiffCopy.removeAll(names2);
+        System.out.println("Difference (names1 - names2): " + names1DiffCopy);
 
-        LinkedHashSet<String> names1IntersecCopy = new LinkedHashSet<>(names1);
-        LinkedHashSet<String> names2IntersecCopy = new LinkedHashSet<>(names2);
+        LinkedHashSet<String> names1IntersecCopy = (LinkedHashSet<String>) names1.clone();
         // Intersection between the two sets.
-        names1IntersecCopy.retainAll(names2IntersecCopy);
-        System.out.println(names1IntersecCopy);
+        names1IntersecCopy.retainAll(names2);
+        System.out.println("Intersection: " + names1IntersecCopy);
     }
 }

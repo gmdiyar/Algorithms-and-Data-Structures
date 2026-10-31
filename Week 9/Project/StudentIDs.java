@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
@@ -42,28 +43,69 @@ public class StudentIDs {
                 "-------------------------------- Tree Set: ------------------------------------------------------------- ");
         System.out.println(studentTreeSet);
 
-        // Using nested loops to find duplicates instead of a hashset would take O(n^2)
-        // time which is quadratic time. This means that as n gets bigger (the number of
-        // elements in the list) the time it takes to look for duplicates gets much
-        // larger. This is because a nested for loop has two stages: the first is to
-        // look at the Ith index and the second is the Jth index. It then compares the
-        // Ith to the Jth to see if they match. This is guranteed to find all the
-        // matches in the array but comes at the cost of time because a nested for loop
-        // must reference every element to every other element at least once.
+        // Find duplicates three ways; all three should print the same IDs.
+        System.out.println(
+                "-------------------------------- Duplicates: ----------------------------------------------------------");
+        System.out.println("Nested loops O(n^2):      " + findDuplicatesNested(students));
+        System.out.println("Sort then scan O(n log n): " + findDuplicatesSorted(students));
+        System.out.println("HashSet O(n):              " + findDuplicatesHashSet(students));
 
-        // The next best option in terms of time compexity to finding duplicates in an
-        // array is to sort the array first then look for the elements that are right
-        // next to each other and see if they are identicle (this works because a sorted
-        // array natually places duplicate elements side by.) This reduces the time need
-        // from O(n^2) to O(n * log n) which is a massive improvement.
+    }
 
-        // Lastly, the fastest way to look for duplicate elements in an array is to turn
-        // it into a hash set. This is because hash sets store the hashes to elements in
-        // what are referred to as 'buckets'. These buckets store the hashes to the
-        // elements which are then computed with each check. This makes it so that
-        // checking weather or not an element exists more than once in array doesn't
-        // require checking each and every element in that array, just the hash of the
-        // elements and checking the buckets intead. This takes an average time of O(1)
-        // per element n so a total time complexity of O(n).
+    // Using nested loops to find duplicates instead of a hashset would take O(n^2)
+    // time which is quadratic time. This means that as n gets bigger (the number of
+    // elements in the list) the time it takes to look for duplicates gets much
+    // larger. This is because a nested for loop has two stages: the first is to
+    // look at the Ith index and the second is the Jth index. It then compares the
+    // Ith to the Jth to see if they match. This is guranteed to find all the
+    // matches in the array but comes at the cost of time because a nested for loop
+    // must reference every element to every other element at least once.
+
+    static TreeSet<Integer> findDuplicatesNested(List<Integer> ids) {
+        TreeSet<Integer> dups = new TreeSet<>();
+        for (int i = 0; i < ids.size(); i++) {
+            for (int j = i + 1; j < ids.size(); j++) {
+                if (ids.get(i).equals(ids.get(j))) {
+                    dups.add(ids.get(i));
+                }
+            }
+        }
+        return dups;
+    }
+
+    // The next best option in terms of time compexity to finding duplicates in an
+    // array is to sort the array first then look for the elements that are right
+    // next to each other and see if they are identicle (this works because a sorted
+    // array natually places duplicate elements side by.) This reduces the time need
+    // from O(n^2) to O(n * log n) which is a massive improvement.
+    static TreeSet<Integer> findDuplicatesSorted(List<Integer> ids) {
+        List<Integer> sorted = new ArrayList<>(ids);
+        Collections.sort(sorted);
+        TreeSet<Integer> dups = new TreeSet<>();
+        for (int i = 1; i < sorted.size(); i++) {
+            if (sorted.get(i).equals(sorted.get(i - 1))) {
+                dups.add(sorted.get(i));
+            }
+        }
+        return dups;
+    }
+
+    // Lastly, the fastest way to look for duplicate elements in an array is to turn
+    // it into a hash set. This is because hash sets store the hashes to elements in
+    // what are referred to as 'buckets'. These buckets store the hashes to the
+    // elements which are then computed with each check. This makes it so that
+    // checking weather or not an element exists more than once in array doesn't
+    // require checking each and every element in that array, just the hash of the
+    // elements and checking the buckets intead. This takes an average time of O(1)
+    // per element n so a total time complexity of O(n).
+    static TreeSet<Integer> findDuplicatesHashSet(List<Integer> ids) {
+        HashSet<Integer> seen = new HashSet<>();
+        TreeSet<Integer> dups = new TreeSet<>();
+        for (Integer id : ids) {
+            if (!seen.add(id)) {
+                dups.add(id);
+            }
+        }
+        return dups;
     }
 }

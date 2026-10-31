@@ -45,7 +45,7 @@ class WordFrequencyCounter {
         List<Map.Entry<String, Integer>> mostCommonWords = new ArrayList<>(words.entrySet());
 
         mostCommonWords.sort((o1, o2) -> Integer.compare(o2.getValue(), o1.getValue()));
-        
+
         for (int i = 0; i < 10 && i < mostCommonWords.size(); i++) {
             System.out.println(mostCommonWords.get(i).getKey());
         }
@@ -75,13 +75,16 @@ class WordFrequencyCounter {
 public class WordCounter {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter file name (text.txt): ");
+        System.out.println("Enter file name (try text.txt): ");
         String input = scanner.nextLine();
 
         WordFrequencyCounter counter = new WordFrequencyCounter(input);
         counter.populteMap();
-        // counter.print10MostCommon();
-        // counter.printWordsAsHashTree();
+        System.out.println("----------- Top 10 Most Common Word: -----------");
+        counter.print10MostCommon();
+        System.out.println("----------- All Words as HashTree: -----------");
+        counter.printWordsAsHashTree();
+        System.out.println("----------- Hapax Legomena: -----------");
         counter.printHapaxLegomena();
     }
 }

@@ -24,9 +24,11 @@ class Reader {
 
     public void populateWordlist() {
         try (Scanner scanner = new Scanner(file)) {
-            while (scanner.hasNext() && Character.isLetter(scanner.next().charAt(0))) {
+            while (scanner.hasNext()) {
                 String token = scanner.next();
-                wordList.add(token);
+                if (Character.isLetter(token.charAt(0))) {
+                    wordList.add(token);
+                }
             }
         } catch (FileNotFoundException e) {
             System.out.println("Error, file not found: " + e);
@@ -44,7 +46,7 @@ class Reader {
     }
 }
 
-public class FileReader {
+public class Exercise20_01_Giyash {
     public static void main(String[] args) {
 
         // Entering text.txt at the prompts prints the contents

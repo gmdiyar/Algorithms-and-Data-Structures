@@ -8,4 +8,23 @@ of O(1) time complexity. This makes it perfect to quickly and effeciently
 referening a unique session token with all other logged in user to check
 if a user is already logged in.
 
+
 2. Store all events in the order they occurred; frequently add to the back and remove from the front
+
+Since we are frequently adding to the back and removing from the front, that is a 
+FIFO (first in first out) collection type, which matches a simple queue. An ArrayList
+in Java functions as a queue and is dynamically resizable which I feel would be 
+benefitial in for this use case so that is the collection type I would use.
+
+3. Store employee records; need to retrieve by employee ID in O(1) and also iterate in ID order
+
+I would use a LinkedHashMap in this case because it keeps insertion order and has a retieval time
+of O(1) which is perfect for this scenario.
+
+
+4. Store a set of banned IP addresses; need O(1) lookup; no ordering needed
+
+I would use a regular HashSet in this case because it contains only unique elements, and with
+banned IP addresses you only need the one unique entry. Additionally, a HashSet has a constant retrieval
+time which is effecient and what this specification requires. Lastly, a HashSet does not keep
+entries in order, and ordering is not needed for this case so it works out well.
