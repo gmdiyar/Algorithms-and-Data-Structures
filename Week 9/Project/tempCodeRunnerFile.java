@@ -1,5 +1,4 @@
-                if (words.containsKey(token) && words.get(token) > 1) {
-                    Integer freq = words.get(token);
-                    System.out.println(freq++);
-                    words.replace(token, freq++);
-                }
+        List<Integer> studentsCOPY2 = new ArrayList<>(students);
+        // Turns the ArrayList into a TreeSet which is naturally ordered.
+        TreeSet studentTreeSet = new TreeSet<>(studentsCOPY2);
+        System.out.println(studentTreeSet);

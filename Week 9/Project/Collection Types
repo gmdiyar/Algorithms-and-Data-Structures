@@ -1,0 +1,11 @@
+1. Store 1 million user sessions, need to check if a user is already logged in in O(1)
+
+For this scenario, I would use a HashSet to store each user session token. 
+I would do this for two reason: one, each element in a HashSet must be
+unique, and each session token must also be unique. This works for both practical
+and security reason. Two, each lookup (contains check) of a token is an average
+of O(1) time complexity. This makes it perfect to quickly and effeciently 
+referening a unique session token with all other logged in user to check
+if a user is already logged in.
+
+2. Store all events in the order they occurred; frequently add to the back and remove from the front

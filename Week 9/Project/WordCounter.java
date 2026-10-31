@@ -1,8 +1,10 @@
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.TreeMap;
 
@@ -40,18 +42,19 @@ class WordFrequencyCounter {
     }
 
     public void sortMap() {
+        List<Map.Entry<String, Integer>> entries = new ArrayList<>(words.entrySet());
 
-        List<Integer> mostCommonWords = new ArrayList<>();
-        for (Integer word : words.values()) {
-            mostCommonWords.add(word);
+        entries.sort((a, b) -> Integer.compare(b.getValue(), a.getValue()));
+
+        for (int i = 0; i < 10; i++) {
+            Map.Entry<String, Integer> e = entries.get(i);
+            System.out.println(e.getKey() + ": " + e.getValue());
         }
+    }
 
-        mostCommonWords.sort((o1, o2) -> Integer.compare(o2, o1));
-        mostCommonWords = mostCommonWords.subList(0, 10);
-        for (int i = 0; i < words.size();)
-            System.out.println(words.get);
-        // TreeMap<String, Integer> treeMap = new TreeMap<>(words);
-        // System.out.println(treeMap);
+    public void getTreeMap() {
+        TreeMap<String, Integer> treeMap = new TreeMap<>(words);
+        System.out.println(treeMap);
     }
 
     public void getHashMap() {
@@ -69,5 +72,6 @@ public class WordCounter {
         counter.populteMap();
         counter.getHashMap();
         counter.sortMap();
+        counter.getTreeMap();
     }
 }
