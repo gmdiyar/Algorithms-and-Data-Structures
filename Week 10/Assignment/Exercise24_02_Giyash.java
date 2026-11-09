@@ -83,7 +83,7 @@ class MyLinkedList<E> {
     }
 
     public E remove(int index) {
-        if (index < 0 || index <= size) {
+        if (index < 0 || index >= size) {
             return null;
         } else if (index == 0) {
             return removeFirst();
