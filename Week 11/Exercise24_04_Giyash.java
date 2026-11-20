@@ -30,12 +30,11 @@ class CustomStack<E> extends ArrayList<E> {
     }
 }
 
-
 public class Exercise24_04_Giyash {
     public static void main(String[] args) {
-        
+
         CustomStack<Integer> primes = new CustomStack<>();
-        
+
         int count = 0;
         int num = 2;
 
@@ -58,11 +57,17 @@ public class Exercise24_04_Giyash {
             System.out.println(primes.pop());
         }
 
-        // The while loop above prints the elements on the primes stack as it pops them from largest to smallest because of the LIFO ordering of a stack.
-        // The custom push method doesn't do anything that a regular ArrayList doesn't do. Namely, it just appends the specified element to the end of the
-        // list. The pop method, however, gets the last element of ArrayList with the 'remove(size() - 1)'. The size() gets the last element since it's at
-        // the end of the ArrayList (or length of the ArrayList), and the - 1 makes sure it's not out of range since we are counting up from 0 and not from 1. This ordering returns the
-        // last element instead of the first element that was inserted. This is exactly the LIFO (Last in, First out) I mentioned earlier.
+        // The while loop above prints the elements on the primes stack as it pops them
+        // from largest to smallest because of the LIFO ordering of a stack.
+        // The custom push method doesn't do anything that a regular ArrayList doesn't
+        // do. Namely, it just appends the specified element to the end of the
+        // list. The pop method, however, gets the last element of ArrayList with the
+        // 'remove(size() - 1)'. The size() gets the last element since it's at
+        // the end of the ArrayList (or length of the ArrayList), and the - 1 makes sure
+        // it's not out of range since we are counting up from 0 and not from 1. This
+        // ordering returns the
+        // last element instead of the first element that was inserted. This is exactly
+        // the LIFO (Last in, First out) I mentioned earlier.
 
         // Sample run:
 
@@ -116,5 +121,5 @@ public class Exercise24_04_Giyash {
         // 5
         // 3
         // 2
-    }    
+    }
 }
